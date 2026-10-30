@@ -329,7 +329,7 @@ class CachingGate:
 def build_gate(kind: str, model: str, *, goal: str | None = None,
                timeout: float | None = None, **backend_kwargs: Any) -> SLMGate:
     if kind == "random":
-        gate: Any = RandomGate(goal=goal)
+        gate: Any = RandomGate(seed=int(os.environ.get("RANDOM_SEED", "1234")), goal=goal)
     elif kind == "rule":
         gate = RuleGate(goal=goal)
     else:
